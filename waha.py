@@ -5,6 +5,19 @@ mcp = FastMCP("waha")
 
 WAHA_URL = "http://localhost:3000/api/sendText"
 
+# Predefined contacts dictionary
+CONTACTS = """
+    "Felipe": "+5511999999999",
+    "Maria": "+5511988888888",
+    "Carlos": "+5511977777777"
+"""
+
+@mcp.resource("phone://resources")
+def get_user_profile() -> str:
+    """Return the phone number for a given user name."""
+    return CONTACTS
+
+
 @mcp.tool()
 async def send_message(phone_number: str, message: str) -> str:
     """Send a WhatsApp message using WAHA.
